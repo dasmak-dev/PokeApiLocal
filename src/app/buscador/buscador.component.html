@@ -1,11 +1,31 @@
-<div class="frame">
+<div class="frame border">
 
-  <app-alerta></app-alerta>
   <div class="contenedor">
     <input class="searchBar" #searchBar type="search" placeholder="Eevee, Pikachu, Charmander..."/>
     <button class="btn btn-primary boton" (click)="this.buscarPokemon(searchBar.value)">Buscar 🔍</button>
   </div>
 
-  <h3 class="col-sm-12">{{this.nombrePokemon}}</h3>
+  <div class="contendorDatos" [hidden]="this.showAlerta">
+    <div class="imagenes border">
+      <div class="img50">
+        <img [src]="imagenPokemon"/>
+      </div>
+      <div class="img50">
+        <img [src]="imagenPokemonShiny"/>
+      </div>
+      <div class="img50">
+        <img [src]="imagenPokemonOriginal" width="200px" height="200px"/>
+      </div >
+    </div>
+    <h3 class="col-sm-12">{{this.nombrePokemon}}</h3>
+
+    <h4>Estadisticas Base [{{this.total}}]</h4>
+    <h5>HP: {{this.hp}}</h5>
+    <h5>Ataque: {{this.ataque}}</h5>
+    <h5>Defensa: {{this.defensa}}</h5>
+    <h5>Ataque Especial: {{this.ataqueEspecial}}</h5>
+    <h5>Defensa Especial: {{this.defensaEspecial}}</h5>
+    <h5>Velocidad: {{this.velocidad}}</h5>
+  </div>
 
 </div>

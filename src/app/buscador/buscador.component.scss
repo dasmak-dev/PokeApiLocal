@@ -17,7 +17,10 @@
   align-content: center;
   width: max-content;
   margin: auto;
+  margin-top: 30px;
   width: 80%;
+  position: sticky;
+  display:block;
 }
 
 .boton {
@@ -30,4 +33,21 @@
   border-width: 5px;
   border-color: black;
   border-style: dashed;
+}
+
+.contenedorDatos {
+  width: 50%;
+  margin: auto;
+}
+
+.imagenes {
+  width: 50%;
+  margin: auto;
+  margin-top: 30px;
+  display:block;
+}
+
+.img50 {
+  display: table-cell;
+  width: 30%;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Data } from '@angular/router';
 import { PokemonClient } from 'pokenode-ts';
 
 @Component({
@@ -9,11 +10,23 @@ import { PokemonClient } from 'pokenode-ts';
 export class BuscadorComponent implements OnInit {
 
   nombrePokemon : string = 'Undefined';
+  imagenPokemon : string | null= "";
+  imagenPokemonShiny : any= "";
+  imagenPokemonOriginal : any= "";
   showAlerta : boolean = false;
+  estadisticasBase : any[] = [];
+  hp : any = "";
+  ataque : any = "";
+  defensa : any = "";
+  ataqueEspecial : any = "";
+  defensaEspecial : any = "";
+  velocidad : any = "";
+  total : number = 0;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.showAlerta = true;
   }
 
   buscarPokemon(pokemon : string) : void {
@@ -23,15 +36,52 @@ export class BuscadorComponent implements OnInit {
       await api
         .getPokemonByName(pokemon)
         .then((data) => {
-          console.log(data.name);
-          this.nombrePokemon = data.name + ", Peso: " + data.weight + " Kg, EXP.Base: " + data.base_experience;
+          this.nombrePokemon = data.name + " " + data.weight + " kg, exp.Base: " + data.base_experience;
           this.showAlerta = false;
-        }) // will output "Luxray"
+          this.imagenPokemon = data.sprites.front_default;
+          this.imagenPokemonShiny = data.sprites.front_shiny;
+          this.imagenPokemonOriginal = data.sprites.other?.['official-artwork'].front_default;
+          this.estadisticasBase = data.stats;
+          this.total = 0;
+          this.añadirStatsBase(data.stats);
+        })
         .catch((error) => {
           console.error("Pokemon no encontrado " + pokemon);
           this.showAlerta = true;
         });
     })();
+  }
+
+  añadirStatsBase(stats: import("pokenode-ts").PokemonStat[]) {
+
+    for (let i of stats) {
+
+      if (i.stat.name == "hp") {
+        this.hp = i.base_stat;
+      }
+
+      if (i.stat.name == "attack") {
+        this.ataque = i.base_stat;
+      }
+
+      if (i.stat.name == "defense") {
+        this.defensa = i.base_stat;
+      }
+
+      if (i.stat.name == "special-attack") {
+        this.ataqueEspecial = i.base_stat;
+      }
+
+      if (i.stat.name == "special-defense") {
+        this.defensaEspecial = i.base_stat;
+      }
+
+      if (i.stat.name == "speed") {
+        this.velocidad = i.base_stat;
+      }
+
+      this.total = this.total + i.base_stat;
+    }
   }
 
 }
