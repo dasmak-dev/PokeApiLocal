@@ -1,0 +1,33 @@
+.frame {
+  flex-wrap: wrap;
+  width: 60%;
+  margin: auto;
+  --background-color: rgb(21, 21, 73);
+}
+
+.searchBar {
+  margin: 10px 10px 10px 10px;
+  height: 40px;
+  width: 60%;
+  font: icon;
+  font-weight: bold;
+}
+
+.contenedor {
+  align-content: center;
+  width: max-content;
+  margin: auto;
+  width: 80%;
+}
+
+.boton {
+  width: 25%;
+  margin: 10px 10px 10px 10px;
+}
+
+.borde {
+  border: 1px;
+  border-width: 5px;
+  border-color: black;
+  border-style: dashed;
+}

@@ -9,6 +9,7 @@ import { PokemonClient } from 'pokenode-ts';
 export class BuscadorComponent implements OnInit {
 
   nombrePokemon : string = 'Undefined';
+  showAlerta : boolean = false;
 
   constructor() { }
 
@@ -24,11 +25,11 @@ export class BuscadorComponent implements OnInit {
         .then((data) => {
           console.log(data.name);
           this.nombrePokemon = data.name + ", Peso: " + data.weight + " Kg, EXP.Base: " + data.base_experience;
-          console.table(data.moves.values);
+          this.showAlerta = false;
         }) // will output "Luxray"
         .catch((error) => {
           console.error("Pokemon no encontrado " + pokemon);
-          alert("Pokemon ".concat(pokemon)+ " no encontrado ");
+          this.showAlerta = true;
         });
     })();
   }
