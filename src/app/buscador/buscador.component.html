@@ -1,8 +1,8 @@
 <div class="frame border">
 
   <div class="contenedor">
-    <input class="searchBar" #searchBar type="search" placeholder="Eevee, Pikachu, Charmander..."/>
-    <button class="btn btn-primary boton" (click)="this.buscarPokemon(searchBar.value)">Buscar 🔍</button>
+    <input class="searchBar" #searchBar type="search" (keyup.enter)="this.buscarPokemon(searchBar.value)" placeholder="Eevee, Pikachu, Charmander..."/>
+    <button class="btn btn-primary boton" (click)="this.buscarPokemon(searchBar.value); searchBar.focus()">Buscar 🔍</button>
   </div>
 
   <div class="contendorDatos" [hidden]="this.showAlerta">
