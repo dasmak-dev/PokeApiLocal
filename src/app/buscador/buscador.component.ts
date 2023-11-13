@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
 import { Data } from '@angular/router';
 import { PokemonClient } from 'pokenode-ts';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-buscador',
@@ -9,6 +9,7 @@ import { PokemonClient } from 'pokenode-ts';
 })
 export class BuscadorComponent implements OnInit {
 
+  @ViewChild('searchBar') searchBar!: ElementRef;
   nombrePokemon : string = 'Undefined';
   imagenPokemon : string | null= "";
   imagenPokemonShiny : any= "";
@@ -34,8 +35,9 @@ export class BuscadorComponent implements OnInit {
       const api = new PokemonClient();
 
       await api
-        .getPokemonByName(pokemon)
+        .getPokemonByName(pokemon.toLowerCase())
         .then((data) => {
+          this.searchBar.nativeElement.value = "";
           this.nombrePokemon = data.name + " " + data.weight + " kg, exp.Base: " + data.base_experience;
           this.showAlerta = false;
           this.imagenPokemon = data.sprites.front_default;
