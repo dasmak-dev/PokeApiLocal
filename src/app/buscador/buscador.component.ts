@@ -23,6 +23,13 @@ export class BuscadorComponent implements OnInit {
   defensaEspecial : any = "";
   velocidad : any = "";
   total : number = 0;
+  tipos : any[] = [];
+  habilidades : any[] = [];
+  experiencia : any = "";
+  peso : any = "";
+  altura : any = "";
+  experienciaBase : any = "";
+  generacion : any = "";
 
   constructor() { }
 
@@ -38,13 +45,19 @@ export class BuscadorComponent implements OnInit {
         .getPokemonByName(pokemon.toLowerCase())
         .then((data) => {
           this.searchBar.nativeElement.value = "";
-          this.nombrePokemon = data.name + " " + data.weight + " kg, exp.Base: " + data.base_experience;
+          this.nombrePokemon = data.name.charAt(0).toUpperCase() + data.name.slice(1);
           this.showAlerta = false;
           this.imagenPokemon = data.sprites.front_default;
           this.imagenPokemonShiny = data.sprites.front_shiny;
           this.imagenPokemonOriginal = data.sprites.other?.['official-artwork'].front_default;
           this.estadisticasBase = data.stats;
           this.total = 0;
+          this.tipos = data.types.map((tipo) => tipo.type.name);
+          this.habilidades = data.abilities.map((habilidad) => habilidad.ability.name);
+          this.experiencia = data.base_experience;
+          this.peso = data.weight;
+          this.altura = data.height;
+          this.experienciaBase = data.base_experience;
           this.añadirStatsBase(data.stats);
         })
         .catch((error) => {

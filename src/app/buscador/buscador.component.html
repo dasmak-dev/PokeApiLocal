@@ -1,12 +1,14 @@
-<div class="frame border">
+<div class="frame">
 
-  <div class="contenedor">
+  <div class="contenedor contenedor-busqueda">
     <input class="searchBar" #searchBar type="search" (keyup.enter)="this.buscarPokemon(searchBar.value)" placeholder="Eevee, Pikachu, Charmander..."/>
-    <button class="btn btn-primary boton" (click)="this.buscarPokemon(searchBar.value); searchBar.focus()">Buscar 🔍</button>
+    <button class="btn btn-primary boton" (click)="this.buscarPokemon(searchBar.value); searchBar.focus()">
+      <span class="texto-boton">Buscar</span> 🔍
+    </button>
   </div>
 
   <div class="contendorDatos" [hidden]="this.showAlerta">
-    <div class="imagenes border">
+    <div class="imagenes contenedor-imagenes">
       <div class="img50">
         <img [src]="imagenPokemon"/>
       </div>
@@ -14,18 +16,49 @@
         <img [src]="imagenPokemonShiny"/>
       </div>
       <div class="img50">
-        <img [src]="imagenPokemonOriginal" width="200px" height="200px"/>
-      </div >
+        <img [src]="imagenPokemonOriginal" width="100px" height="100px"/>
+      </div>
     </div>
-    <h3 class="col-sm-12">{{this.nombrePokemon}}</h3>
 
+    <h3 class="col-sm-12 nombre-pokemon">✨ {{this.nombrePokemon}}</h3>
+
+    <div>
+      <h4 class="col-sm-12">Tipos</h4>
+      <div class="col-sm-12">
+        <div class="col-sm-6" *ngFor="let tipo of this.tipos">
+          <ul>
+            <li>{{tipo}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h4 class="col-sm-12">Habilidades</h4>
+      <div class="col-sm-12">
+        <div class="col-sm-6" *ngFor="let habilidad of this.habilidades">
+          <ul>
+            <li>{{habilidad}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <ul>
+      <li>Altura: {{this.altura}} m</li>
+      <li>Peso: {{this.peso}} kg</li>
+    </ul>
+    <ul>
+      <li>Experiencia Base: {{this.experienciaBase}}</li>
+    </ul>
     <h4>Estadisticas Base [{{this.total}}]</h4>
-    <h5>HP: {{this.hp}}</h5>
-    <h5>Ataque: {{this.ataque}}</h5>
-    <h5>Defensa: {{this.defensa}}</h5>
-    <h5>Ataque Especial: {{this.ataqueEspecial}}</h5>
-    <h5>Defensa Especial: {{this.defensaEspecial}}</h5>
-    <h5>Velocidad: {{this.velocidad}}</h5>
+    <ul>
+      <li>HP: {{this.hp}}</li>
+      <li>Ataque: {{this.ataque}}</li>
+      <li>Defensa: {{this.defensa}}</li>
+      <li>Ataque Especial: {{this.ataqueEspecial}}</li>
+      <li>Defensa Especial: {{this.defensaEspecial}}</li>
+      <li>Velocidad: {{this.velocidad}}</li>
+    </ul>
+
   </div>
 
 </div>
